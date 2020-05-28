@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pihole
+spec:
+  type: NodePort 
+  selector:
+    app: pihole
+  ports: 
+  - name: http-admin
+    port: 8888 
+    targetPort: 80
+  - name: 53-udp
+    port: 53
+    targetPort: 53
+    protocol: UDP
+  - name: 53-tcp
+    port: 53
+    targetPort: 53
+    protocol: TCP
+  externalIPs:
+  - 192.168.0.200
+  - 192.168.0.201
+  - 192.168.0.202

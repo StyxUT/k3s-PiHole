@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pihole
+  labels:
+    app: pihole
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pihole
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: pihole
+    spec:
+      containers:
+      - env:
+        - name: DNS1
+          value: 127.0.0.1
+        - name: DNS2
+          value: 176.103.130.130
+        - name: IPv6
+          value: "False"
+        - name: TZ
+          value: America/Denver
+        - name: WEBPASSWORD
+          value: "4757"
+        image: pihole/pihole:latest
+        imagePullPolicy: "Always"
+        name: pihole
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        - containerPort: 53
+          name: dns-tcp
+          protocol: TCP
+        - containerPort: 53
+          name: dns-udp
+          protocol: UDP
+        volumeMounts:
+        - name: pihole 
+          mountPath: /etc/pihole/
+          subPath: pihole
+        - name: pihole 
+          mountPath: /etc/dnsmasq.d
+          subPath: pihole/dnsmasq-d
+      volumes:
+      - name: pihole
+        persistentVolumeClaim:
+          claimName: synology-pihole
