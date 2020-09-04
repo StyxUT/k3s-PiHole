@@ -21,7 +21,7 @@ spec:
         - name: DNS1
           value: 127.0.0.1
         - name: DNS2
-          value: 176.103.130.130
+          value: 1.0.0.1
         - name: IPv6
           value: "False"
         - name: TZ
