@@ -4,7 +4,7 @@ metadata:
   name: synology
 spec:
   capacity:
-    storage: 100Gi
+    storage: 3Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteMany
