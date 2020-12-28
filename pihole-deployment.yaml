@@ -41,30 +41,30 @@ spec:
         - containerPort: 53
           name: dns-udp
           protocol: UDP
-        # startupProbe:
-        #   httpGet:
-        #     path: /admin
-        #     port: 8888
-        #   initialDelaySeconds: 800
-        #   timeoutSeconds: 5
-        #   periodSeconds: 10
-        #   failureThreshold: 15
-        # readinessProbe:
-        #   httpGet:
-        #     path: /admin
-        #     port: 8888
-        #   initialDelaySeconds: 600
-        #   timeoutSeconds: 5
-        #   periodSeconds: 10
-        #   failureThreshold: 5
-        # livenessProbe:
-        #   httpGet:
-        #     path: /admin
-        #     port: 8888
-        #   initialDelaySeconds: 700
-        #   timeoutSeconds: 10
-        #   periodSeconds: 30
-        #   failureThreshold: 3      
+        startupProbe:
+          httpGet:
+            path: /admin
+            port: 80
+          initialDelaySeconds: 300
+          timeoutSeconds: 5
+          periodSeconds: 10
+          failureThreshold: 15
+        readinessProbe:
+          httpGet:
+            path: /admin
+            port: 80
+          initialDelaySeconds: 30
+          timeoutSeconds: 5
+          periodSeconds: 10
+          failureThreshold: 5
+        livenessProbe:
+          httpGet:
+            path: /admin
+            port: 80
+          initialDelaySeconds: 30
+          timeoutSeconds: 10
+          periodSeconds: 30
+          failureThreshold: 3      
         volumeMounts:
         - name: pihole 
           mountPath: /etc/pihole/
